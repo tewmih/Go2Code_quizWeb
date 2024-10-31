@@ -1,0 +1,53 @@
+.cardContainer{
+    margin: 0 20px;
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: left;
+    padding: 3px 30px;
+    width: 93%;
+    height: max-content;
+    box-shadow: 0 6px 6px rgba(243, 239, 239, 0.658) ;
+    /* overflow: scroll; */
+}
+.cardContainer .left p{
+     font-size: 20px;
+}
+.cardContainer .right{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 20px;
+
+}
+.cardContainer .right .upper{
+    font-size: 20px;
+    color:rgb(7, 7, 7);
+
+}
+.cardContainer .right .lower{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 20px;
+   
+    max-height: 200px;
+
+}
+.right .lower div{
+    display: flex;
+    gap: 0px;
+    /* justify-content: space-evenly; */
+    height:30px;
+    position: relative;
+    bottom: 10px;
+
+}
+.right .lower div input{
+    margin-right: 15px;
+    cursor: pointer;
+}
+.right .lower p{
+    position: relative;
+    bottom: 10px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

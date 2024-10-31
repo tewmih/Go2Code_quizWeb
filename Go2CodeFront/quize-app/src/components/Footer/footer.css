@@ -1,0 +1,48 @@
+.footerContainer{
+    box-shadow: 0 2px 8px grey, 0 6px 6px grey;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    height: 70px;
+    width: 100%;
+    /* position: fixed;
+    bottom: 0; */
+    overflow: hidden;
+    z-index: 10;
+
+}
+.mediaContainer{
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    position:relative;
+    top: 25px;
+    left: 5px;
+}
+.messagePart{
+    position:relative;
+    top:10px;
+}
+.messagePart ul{
+    display: flex !important;
+    flex-direction: row;
+    box-shadow: 0 2px 5px rgb(248, 242, 242);
+    list-style: none;
+
+    
+}
+.messagePart li{
+  margin: 0 10px;
+}
+
+.contactus{
+   position: relative;
+   top: 20px;
+   display: flex;
+   flex-direction: row;
+}
+.contactus textarea{
+    margin: 0 5px;
+    width: 120px;
+    height: 25px;
+}

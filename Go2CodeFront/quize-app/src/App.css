@@ -1,0 +1,10 @@
+
+body html{
+    margin:0;
+    height: 100%;
+}
+.routerClass{
+    flex: 1; /* Allows this section to grow and fill available space */
+    padding: 20px; /* Add some padding if needed */
+    overflow-y: auto
+}
