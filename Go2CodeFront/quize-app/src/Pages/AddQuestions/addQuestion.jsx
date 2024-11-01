@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react';
 
 import './addQuestion.css'
+import SideBar from '../../components/SideBar/SideBar';
  function addQuestions(){
     const[catagory,setCatagory]=useState('');
     const[url,setUrl]=useState('');
@@ -67,6 +68,8 @@ import './addQuestion.css'
     }
 
     return(
+        <div className="allDashboardContainer">
+            <SideBar />
         <div className="addQuestionContainer">
             <h2>Add relevant and non-ambiguous questions</h2>
             <form onSubmit={submitHandler}>
@@ -94,6 +97,7 @@ import './addQuestion.css'
                     <input type="submit" value="Submit"/>
                 </div>
             </form>
+        </div>
         </div>
     )
  }

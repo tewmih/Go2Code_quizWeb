@@ -1,12 +1,12 @@
-
+const filePath= require('path')
 const userModel=require('../Model/useModel')
 const jwt =require('jsonwebtoken');
 
-const tokenServer=(id)=>{
-    return(jwt.sign({id},process.env.SECRET_STR,{expiresIn:Date.now()+30*60*1000}));
-}
+const tokenServer = (id) => {
+    return jwt.sign({ id }, process.env.SECRET_STR, { expiresIn: '30m' });
+};
 
-// console.log('reached')
+
 exports.signup=async (req,res)=>{
     
     try{
@@ -19,15 +19,22 @@ exports.signup=async (req,res)=>{
                 }
             })  
         }
-        const user= await userModel.create(req.body);
+        const user= await userModel.create({
+            name:req.body.name,
+            email:req.body.email,
+            password:req.body.password,
+            confirmPassword:req.body.confirmPassword,
+            photo:req.file?req.file.filename:'default.jpg'
+        });
         // if(!user){
-        //     return res.status(400).json({
+        //     return res.status(500).json({
         //         status:'error',
         //         data:{
         //             message:'failed to create user\'from database\''
         //         }
         //     })
         // }
+        
         res.status(201).json({
             status:'success',
             data:{
@@ -44,34 +51,50 @@ exports.signup=async (req,res)=>{
         })
     }
 }
-exports.login=async (req,res)=>{
-    try{
-        const user= await userModel.findOne({email:req.body.email}).select('password');
-        const isSame= await user.isSamePassword(req.body.password,user.password);
-        if(!user || !isSame){
-            res.status(404).json({
-                status:'fail',
-                data:{
-                    message:'User and/or password mismatch'
+exports.login = async (req, res) => {
+    try {
+        const user = await userModel.findOne({ email: req.body.email }).select(['password', 'name', 'email', 'photo']);
+        
+        if (!user) {
+            return res.status(404).json({
+                status: 'fail',
+                data: {
+                    message: 'User not found'
                 }
-            })
-            return;
+            });
         }
-        const token =tokenServer(user._id);
-        req.user=user;
-       res.status(200).json({
-        status:'success',
-        data:{
-            token,
-            user
+
+        const isSame = await user.isSamePassword(req.body.password, user.password);
+        if (!isSame) {
+            return res.status(404).json({
+                status: 'fail',
+                data: {
+                    message: 'Password mismatch'
+                }
+            });
         }
-       })
-    }catch(error){
-        res.status(404).json({
-            status:'fail',
-            data:{
-                message:"Error "+error.message
+        console.log('user : ' + user)
+
+        const token = tokenServer(user._id);
+        const path = `http://localhost:3005/static/Images/${user.photo}`; // Construct the full image path////////////////////////////////////////////////////////////////
+        console.log('path: ', path);
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                token,
+                url: path, // Sends the full path to the photo////////////////////////////////////////////////////////////////////////////////////////
+                name: user.name,
+                email: user.email,
+                id: user._id
             }
-        })
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+            data: {
+                message: "Error " + error.message
+            }
+        });
     }
-}
+};

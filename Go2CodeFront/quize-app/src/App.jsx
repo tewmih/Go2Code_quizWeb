@@ -23,7 +23,7 @@ function App() {
         <Router>
           <Header />
           <Routes className='routeClass'>
-            <Route path='/' exact element={<Signup/>}/>
+            <Route path='/' exact element={<Dashboard/>}/>
             <Route path='/signup' exact element={<Signup/>} />
             <Route path='/login' element={<Login/>}/>
             <Route path='/dashboard' element={<Dashboard/>} />

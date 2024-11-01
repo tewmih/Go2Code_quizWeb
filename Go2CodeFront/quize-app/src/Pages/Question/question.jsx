@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../../components/Card/card";
 import CustomDialog from "../../Utility/DialogBox/DialogBox";
 import './question.css';
+import SideBar from "../../components/SideBar/SideBar";
 
 function Question() {
   const [error, setError] = useState('');
@@ -86,6 +87,7 @@ function Question() {
   };
 
   return (
+  
     <React.Fragment>
       {error ? (
         <div className="error">
@@ -124,6 +126,7 @@ function Question() {
               </select>
             </div>
           </div>
+        
           <Card questions={allInOne} setUserAnswer={setUserAnswer} />
           <button onClick={() => {
             evaluateAnswers();

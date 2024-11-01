@@ -39,7 +39,11 @@ const userSchema = mongoose.Schema({
         }
     },
     
-    
+    photo:{
+        type: String,
+        // default: 'default.jpg',
+        // match: /(default\.jpg)$/
+    }
 });
 
 // Pre-save hook to hash the password
@@ -55,6 +59,7 @@ userSchema.methods.isSamePassword= async function(userPassword,DBPassword){
     //  console.log('user',userPassword,'da',DBPassword)
     return await bcrypt.compare(userPassword,DBPassword);
 }
+
 
 const userModel = mongoose.model('User', userSchema); // Changed to 'User' for consistency
 

@@ -1,29 +1,36 @@
-import {createStore} from 'redux'
+import { createStore } from 'redux';
 
-const intialState={
-    count:0,
-    name:'',
-    email:'',
-    password:'',
-    confirmPassword:'',
-}
+// Initial state with user data grouped together
+const initialState = {
+    count: 0,
+    user: {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        url: '',
+    },
+};
 
-const GlobalReducer=(state=intialState,action)=>{
-   switch(action.type){
-    case 'name':
-        return{...state,name:action.payload };
-    case 'email':
-        return{...state,email:action.payload};
-    case 'password':
-        return{...state,password:action.payload};
-    case 'confirmPassword':
-        return{...state,confirmPassword:action.payload};
-    default:return state;
-   }
-}
+// Global reducer function
+const globalReducer = (state = initialState, action) => {
+    switch (action.type) {
+        // Update user information
+        case 'SET_USER':
+            return { ...state, user: { ...state.user, ...action.payload } };
+        case 'CLEAR_USER':
+            return { ...state, user: initialState.user }; // Reset user data to initial state
+        case 'INCREMENT_COUNT':
+            return { ...state, count: state.count + 1 };
+        case 'DECREMENT_COUNT':
+            return { ...state, count: state.count - 1 };
+        default:
+            return state;
+    }
+};
 
 
-
-const store=createStore(GlobalReducer)
+// Create Redux store
+const store = createStore(globalReducer);
 
 export default store;

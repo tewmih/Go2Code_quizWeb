@@ -1,0 +1,31 @@
+.allDashboardContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    
+}
+.allDashboardContainer .left{
+ background-color: rgb(139, 154, 167);
+ /* padding: 5px 10px; */
+ border-radius: 5px;
+ /* overflow-y: scroll; */
+ width: 20%;
+}
+.allDashboardContainer .left .upper{
+    background-color: rgb(5, 195, 21);
+    width: 87%;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+.allDashboardContainer .left .sidebar{
+    width: 100%;
+    overflow-y: scroll;
+    padding-right: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    height: 60vh;
+    
+}
